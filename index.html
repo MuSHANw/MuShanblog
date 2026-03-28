@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MuSHAN的个人博客</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <style>
+        /* 全局样式与变量 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #faf9f8;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部区域 */
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid #eaeaea;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .blog-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-title a {
+            text-decoration: none;
+            color: #111;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #0077cc;
+        }
+
+        /* 主布局：两栏 */
+        .main-grid {
+            display: flex;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .content {
+            flex: 3;
+            min-width: 0;
+            /* 防止溢出 */
+        }
+
+        .sidebar {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        /* 文章卡片 */
+        .post-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s, transform 0.1s;
+            border: 1px solid #efefef;
+        }
+
+        .post-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .post-title {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-title a {
+            text-decoration: none;
+            color: #111;
+        }
+
+        .post-title a:hover {
+            color: #0077cc;
+        }
+
+        .post-meta {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .post-excerpt {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* 侧边栏组件 */
+        .sidebar-widget {
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #efefef;
+        }
+
+        .sidebar-widget h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            border-left: 4px solid #0077cc;
+            padding-left: 0.75rem;
+        }
+
+        .about-text {
+            font-size: 0.95rem;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 0.6rem;
+        }
+
+        .category-list a {
+            text-decoration: none;
+            color: #2c3e50;
+        }
+
+        .category-list a:hover {
+            color: #0077cc;
+        }
+
+        /* 搜索框 */
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .search-box button {
+            background: #0077cc;
+            border: none;
+            color: white;
+            padding: 0 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* 页脚 */
+        .site-footer {
+            border-top: 1px solid #eaeaea;
+            padding: 2rem 0;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .main-grid {
+                flex-direction: column;
+            }
+
+            .post-card {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="blog-title">
+                <img border="0" src="images/Avatar.png" alt="MuSHAN头像" width="40" height="40">
+                <a href="#">MuSHAN</a>
+
+            </div>
+            <nav class="nav-links">
+                <a href="splash.html">首页</a>
+                <a href="#">项目</a>
+                <a href="about.html">关于</a>
+                <a href="contact.html">联系</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="main-grid">
+            <!-- 主要内容区：文章列表 -->
+            <div class="content">
+                <article class="post-card">
+                    <h2 class="post-title"><a href="#">敬请期待……</a></h2>
+                    <div class="post-meta">
+                        <span>📅 xxxx-xx-xx</span>
+                        <span>🏷️ xx / xxx</span>
+                    </div>
+                    <p class="post-excerpt">敬请期待……</p>
+                    <a href="#" class="read-more">阅读全文 →</a>
+                </article>
+
+                <article class="post-card">
+                    <h2 class="post-title"><a href="#">敬请期待……</a></h2>
+                    <div class="post-meta">
+                        <span>📅 xxxx-xx-xx</span>
+                        <span>🏷️ xx / xxx</span>
+                    </div>
+                    <p class="post-excerpt">敬请期待……</p>
+                    <a href="#" class="read-more">阅读全文 →</a>
+                </article>
+
+                <article class="post-card">
+                    <h2 class="post-title"><a href="#">敬请期待……</a></h2>
+                    <div class="post-meta">
+                        <span>📅 xxxx-xx-xx</span>
+                        <span>🏷️ xx / xxx</span>
+                    </div>
+                    <p class="post-excerpt">敬请期待……
+                    </p>
+                    <a href="#" class="read-more">阅读全文 →</a>
+                </article>
+            </div>
+
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                    <h3>关于我</h3>
+                    <div class="about-text">
+                        敬请期待……
+                    </div>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>搜索</h3>
+                    <div class="search-box">
+                        <input type="text" placeholder="搜文章...">
+                        <button>🔍</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>分类</h3>
+                    <ul class="category-list">
+                        <li><a href="#">敬请期待……</a></li>
+                        <li><a href="#">敬请期待……</a></li>
+                        <li><a href="#">敬请期待……</a></li>
+                        <li><a href="#">敬请期待……</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>近期文章</h3>
+                    <ul class="category-list">
+                        <li><a href="#">敬请期待……</a></li>
+                        <li><a href="#">敬请期待……</a></li>
+                        <li><a href="#">敬请期待……</a></li>
+                        <li><a href="#">敬请期待……</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 MuSHAN · 保留所有权利 | 简单生活，认真写作</p>
+        </div>
+    </footer>
+
+    <!-- 简单的交互：搜索框演示（仅控制台输出，实际功能需后端支持） -->
+    <script>
+        const searchBtn = document.querySelector('.search-box button');
+        const searchInput = document.querySelector('.search-box input');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                const keyword = searchInput.value.trim();
+                if (keyword) {
+                    console.log(`🔍 搜索关键词: ${keyword}`);
+                    // 实际使用时可以跳转到搜索页或动态过滤文章
+                    alert(`演示模式：搜索 “${keyword}” 的功能待集成。`);
+                } else {
+                    alert('请输入要搜索的内容');
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

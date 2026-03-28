@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我 | MuSHAN</title>
+    <style>
+        /* 复用首页风格，保持一致性 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #faf9f8;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid #eaeaea;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .blog-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .blog-title a {
+            text-decoration: none;
+            color: #111;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #0077cc;
+        }
+
+        .about-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid #efefef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .about-card h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #0077cc;
+            padding-left: 1rem;
+        }
+
+        .about-avatar {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .about-avatar img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #f0f0f0;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: #2c3e50;
+            line-height: 1.7;
+        }
+
+        .site-footer {
+            border-top: 1px solid #eaeaea;
+            padding: 2rem 0;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="blog-title">
+                <a href="index.html">MuSHAN</a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="#">项目</a>
+                <a href="about.html">关于</a>
+                <a href="contact.html">联系</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="about-card">
+            <h1>👋 关于我</h1>
+            <div class="about-avatar">
+                <!-- 替换成你自己的头像图片路径 -->
+                <img src="images/avatar.png" alt="MuSHAN头像">
+            </div>
+            <div class="about-text">
+                <p>你好呀！我是 MuSHAN，一名热爱编程的高中生。</p>
+                <p>2026 年开始接触前端，从 HTML 搭积木开始，慢慢学会了 CSS 装修、JavaScript 互动。现在正朝着全栈开发前进，目标是做出能帮助别人的实用工具。</p>
+                <p>喜欢阅读、乒乓球、研究数码。这个博客用来记录我的学习笔记和生活思考，欢迎交流～</p>
+                <p style="margin-top: 1rem;">✨ 博客还在建设中，敬请期待更多内容 ✨</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 MuSHAN · 简单生活，认真写作</p>
+        </div>
+    </footer>
+</body>
+
+</html>

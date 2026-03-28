@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>欢迎 | MuSHAN</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 背景容器，用来叠加多张图片实现渐变切换 */
+        .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .bg-layer.active {
+            opacity: 1;
+        }
+
+        /* 半透明遮罩，让文字更清晰 */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        /* 内容居中 */
+        .content {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 12px 32px;
+            background-color: #0077cc;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #005fa3;
+            transform: scale(1.05);
+        }
+
+        /* 响应式：手机小屏 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 10px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 背景图层容器 -->
+    <div class="bg" id="bgContainer"></div>
+    <div class="overlay"></div>
+
+    <div class="content">
+        <h1>欢迎来到 MuSHAN 的博客</h1>
+        <a href="index.html" class="btn">了解更多 →</a>
+    </div>
+
+    <script>
+        // 图片数组（你可以替换成自己的风景图URL）
+        const images = [
+            "images/dameisha.jpg",  // 风景示例1
+            "images/gangxiabei.jpg",  // 风景示例2
+            "images/honghu.jpg",   // 风景示例3
+            "images/rencai.jpg"    // 风景示例4
+        ];
+
+        let currentIndex = 0;
+        const bgContainer = document.getElementById('bgContainer');
+
+        // 创建两个图层用于交替淡入淡出
+        function initBackground() {
+            // 创建两个 div 作为图层
+            for (let i = 0; i < 2; i++) {
+                const layer = document.createElement('div');
+                layer.className = 'bg-layer';
+                bgContainer.appendChild(layer);
+            }
+            // 设置第一张图片
+            const layers = document.querySelectorAll('.bg-layer');
+            layers[0].style.backgroundImage = `url(${images[0]})`;
+            layers[0].classList.add('active');
+            layers[1].style.backgroundImage = `url(${images[1]})`;
+        }
+
+        // 切换图片：让当前激活的图层淡出，下一个图层淡入
+        function switchBackground() {
+            const layers = document.querySelectorAll('.bg-layer');
+            // 找到当前激活的图层
+            let activeIndex = -1;
+            for (let i = 0; i < layers.length; i++) {
+                if (layers[i].classList.contains('active')) {
+                    activeIndex = i;
+                    break;
+                }
+            }
+            // 下一个要显示的图片索引
+            const nextImageIndex = (currentIndex + 1) % images.length;
+            // 下一个图层索引（交替使用两个图层）
+            const nextLayerIndex = activeIndex === 0 ? 1 : 0;
+
+            // 更新下一个图层的背景图
+            layers[nextLayerIndex].style.backgroundImage = `url(${images[nextImageIndex]})`;
+            // 激活下一个图层
+            layers[nextLayerIndex].classList.add('active');
+            // 移除当前激活图层的 active 类（它会淡出）
+            layers[activeIndex].classList.remove('active');
+
+            currentIndex = nextImageIndex;
+        }
+
+        // 页面加载后先初始化背景
+        window.addEventListener('DOMContentLoaded', () => {
+            initBackground();
+            // 开始轮播：每隔 4 秒切换一次
+            setInterval(switchBackground, 4000);
+        });
+    </script>
+</body>
+
+</html>
