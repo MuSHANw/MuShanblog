@@ -6,75 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MuSHAN的个人博客</title>
     <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/shared.css">
     <style>
-        /* 全局样式与变量 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background-color: #faf9f8;
-        }
-
-        /* 容器 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* 头部区域 */
-        .site-header {
-            background: #fff;
-            border-bottom: 1px solid #eaeaea;
-            padding: 1.5rem 0;
-            position: sticky;
-            top: 0;
-            backdrop-filter: blur(8px);
-            background-color: rgba(255, 255, 255, 0.9);
-            z-index: 100;
-        }
-
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .blog-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .blog-title a {
-            text-decoration: none;
-            color: #111;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.8rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #444;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #e67e22;
-        }
-
         /* 主布局：两栏 */
         .main-grid {
             display: flex;
@@ -212,24 +145,7 @@
             font-size: 0.85rem;
         }
 
-        /* 页脚 */
-        .site-footer {
-            border-top: 1px solid #eaeaea;
-            padding: 2rem 0;
-            text-align: center;
-            color: #6c757d;
-            font-size: 0.85rem;
-            margin-top: 2rem;
-        }
-
-        /* 响应式 */
         @media (max-width: 768px) {
-            .header-inner {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
             .main-grid {
                 flex-direction: column;
             }
@@ -246,13 +162,15 @@
     <header class="site-header">
         <div class="container header-inner">
             <div class="blog-title">
-                <img border="0" src="images/Avatar.png" alt="MuSHAN头像" width="40" height="40">
-                <a href="#">MuSHAN</a>
-
+                <a href="index.html">
+                    <img src="images/Avatar.png" alt="MuSHAN头像">
+                    MuSHAN
+                </a>
             </div>
             <nav class="nav-links">
-                <a href="splash.html">首页</a>
+                <a href="index.html" class="active">首页</a>
                 <a href="projects.html">项目</a>
+                <a href="tech-service.html">技术服务</a>
                 <a href="about.html">关于</a>
                 <a href="contact.html">联系</a>
             </nav>

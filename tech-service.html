@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技术服务 | MuSHAN</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/shared.css">
+    <style>
+        main.container {
+            max-width: 1000px;
+        }
+
+        /* ===== 横幅区 ===== */
+        .service-banner {
+            text-align: center;
+            padding: 3.5rem 1.5rem;
+            margin: 2rem 0 3rem;
+            background: linear-gradient(135deg, #fef9f0, #fff4e5);
+            border-radius: 24px;
+            border: 1px solid #fdebd0;
+        }
+
+        .service-banner h1 {
+            font-size: 2.4rem;
+            margin-bottom: 0.8rem;
+            color: #1a1a1a;
+        }
+
+        .service-banner .subtitle {
+            font-size: 1.3rem;
+            color: #e67e22;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .service-banner .desc {
+            font-size: 1.05rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ===== 通用区块标题 ===== */
+        .section-title {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #e67e22;
+            padding-left: 1rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        /* ===== 套餐卡片 ===== */
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid #efefef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.2s, transform 0.1s;
+        }
+
+        .plan-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .plan-card.featured {
+            border-color: #f5cba7;
+            background: linear-gradient(135deg, #fffefb, #fff8f0);
+            position: relative;
+        }
+
+        .plan-card.featured::before {
+            content: "推荐";
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #e67e22;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .plan-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #e67e22;
+            margin-bottom: 1rem;
+        }
+
+        .plan-price small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #6c757d;
+        }
+
+        .plan-desc {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+            flex: 1;
+        }
+
+        .plan-info {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .plan-info strong {
+            color: #2c3e50;
+        }
+
+        /* ===== 进阶服务 ===== */
+        .addon-intro {
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .addon-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .addon-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid #efefef;
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+
+        .addon-table th,
+        .addon-table td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .addon-table th {
+            background: #fef9f0;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .addon-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .addon-table td:first-child {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .addon-table td:nth-child(2) {
+            color: #e67e22;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .addon-table td:last-child {
+            color: #4a5568;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 600px) {
+            .addon-table th,
+            .addon-table td {
+                padding: 0.8rem 0.8rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ===== 邀请福利 ===== */
+        .referral-box {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            border: 1px solid #f0d78c;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #7d6608;
+        }
+
+        .referral-box strong {
+            color: #b7950b;
+        }
+
+        /* ===== 服务列表 ===== */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .service-item {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.3rem 1.5rem;
+            border: 1px solid #efefef;
+            transition: box-shadow 0.2s;
+        }
+
+        .service-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .service-item .icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-item .name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* ===== 优势列表 ===== */
+        .advantage-list {
+            list-style: none;
+        }
+
+        .advantage-list li {
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 0.8rem;
+            border: 1px solid #efefef;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .advantage-list li strong {
+            color: #e67e22;
+        }
+
+        .advantage-list li .desc {
+            color: #4a5568;
+        }
+
+        /* ===== 联系区 ===== */
+        .contact-section {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid #efefef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .contact-section p {
+            margin: 0.6rem 0;
+            color: #4a5568;
+            font-size: 1rem;
+        }
+
+        .contact-section a {
+            color: #e67e22;
+            text-decoration: none;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .service-banner .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="blog-title">
+                <a href="index.html">
+                    <img src="images/Avatar.png" alt="MuSHAN头像">
+                    MuSHAN
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="projects.html">项目</a>
+                <a href="tech-service.html" class="active">技术服务</a>
+                <a href="about.html">关于</a>
+                <a href="contact.html">联系</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 1. 顶部横幅 -->
+        <div class="service-banner">
+            <h1>🚀 深圳高中生技术支援计划</h1>
+            <p class="subtitle">让每一个学生组织，都能拥有自己的官网</p>
+            <p class="desc">
+                由深圳高中生社区创始人发起的技术平权项目，<br>
+                为深圳各高中社团、学生会、班级提供极低价网站制作服务。
+            </p>
+        </div>
+
+        <!-- 2. 服务套餐 -->
+        <div class="section">
+            <h2 class="section-title">📦 服务套餐</h2>
+            <div class="plan-grid">
+                <!-- 体验版 -->
+                <div class="plan-card">
+                    <div class="plan-name">🌱 体验版</div>
+                    <div class="plan-price">¥10 <small>/ 个</small></div>
+                    <p class="plan-desc">
+                        单页面宣传网站，基于模板快速替换图文，部署到免费托管平台，含基础更新教程。
+                    </p>
+                    <p class="plan-info"><strong>交付时间：</strong>1-2 天</p>
+                    <p class="plan-info"><strong>适合：</strong>首次体验的社团、班级、个人</p>
+                </div>
+
+                <!-- 标准版 -->
+                <div class="plan-card featured">
+                    <div class="plan-name">⭐ 标准版</div>
+                    <div class="plan-price">¥25 <small>首单特价（原价¥50）</small></div>
+                    <p class="plan-desc">
+                        多页面完整站点（首页 + 关于我们 + 活动相册 + 联系方式），含表单收集功能，免费部署，提供完整更新维护教程。
+                    </p>
+                    <p class="plan-info"><strong>交付时间：</strong>3-5 天</p>
+                    <p class="plan-info"><strong>适合：</strong>需要完整展示的社团、学生会、团委</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 进阶服务（可选） -->
+        <div class="section">
+            <h2 class="section-title">⚙️ 进阶服务（可选）</h2>
+            <p class="addon-intro">以下服务可在体验版或标准版基础上叠加购买，按需选择即可。</p>
+            <div class="addon-table-wrapper">
+                <table class="addon-table">
+                    <thead>
+                        <tr>
+                            <th>服务项目</th>
+                            <th>价格</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>独立域名绑定</td>
+                            <td>+15元</td>
+                            <td>帮你将网站绑定到自定义域名（域名需甲方自购，我会指导你如何购买，首年通常5-15元）</td>
+                        </tr>
+                        <tr>
+                            <td>后台管理系统</td>
+                            <td>+50元</td>
+                            <td>为你搭建简易后台，可自主发布活动新闻、更新相册，无需懂代码</td>
+                        </tr>
+                        <tr>
+                            <td>首年维护服务</td>
+                            <td>+30元/年</td>
+                            <td>一年内累计3次小修改（每次不超1小时），如更换封面图、更新联系方式等</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. 邀请福利 -->
+        <div class="section">
+            <h2 class="section-title">🔥 邀请福利</h2>
+            <div class="referral-box">
+                已下单的同学，每成功邀请一个新社团下单，<strong>邀请人下次服务打 8 折！</strong><br>
+                被邀请的新客户首次下单同样享受 <strong>¥25 特价</strong>。
+            </div>
+        </div>
+
+        <!-- 4. 我能做什么 -->
+        <div class="section">
+            <h2 class="section-title">🎯 我能做什么</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <div class="icon">🏫</div>
+                    <div class="name">社团招新宣传站</div>
+                </div>
+                <div class="service-item">
+                    <div class="icon">🏛️</div>
+                    <div class="name">学生会/团委官方主页</div>
+                </div>
+                <div class="service-item">
+                    <div class="icon">🎓</div>
+                    <div class="name">班级纪念/毕业季网站</div>
+                </div>
+                <div class="service-item">
+                    <div class="icon">🎨</div>
+                    <div class="name">个人作品集/竞赛展示</div>
+                </div>
+                <div class="service-item">
+                    <div class="icon">🎪</div>
+                    <div class="name">校园活动专题页<br>（艺术节/运动会/校庆）</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 为什么选择我 -->
+        <div class="section">
+            <h2 class="section-title">💡 为什么选择我</h2>
+            <ul class="advantage-list">
+                <li>
+                    <strong>🎨 用心为你定制</strong><br>
+                    <span class="desc">每一份交付都基于模板进行精心调整，包括配色、布局和图文替换，确保成品独一无二</span>
+                </li>
+                <li>
+                    <strong>🎓 同为深圳高中生</strong><br>
+                    <span class="desc">更懂你的需求，沟通无障碍</span>
+                </li>
+                <li>
+                    <strong>⚡ 快速交付</strong><br>
+                    <span class="desc">模板化流程成熟，最快 1 天上线</span>
+                </li>
+                <li>
+                    <strong>🆓 免费部署</strong><br>
+                    <span class="desc">帮你托管到 GitHub Pages，永久免费运行</span>
+                </li>
+                <li>
+                    <strong>🔧 教会你维护</strong><br>
+                    <span class="desc">交付后提供简易教程，你自己就能改内容</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 6. 我的作品 -->
+        <div class="section">
+            <h2 class="section-title">🖼️ 我的作品</h2>
+            <div
+                style="background:#fff; border-radius:16px; padding:2rem; border:1px solid #efefef; text-align:center; color:#6c757d; font-size:1rem; line-height:1.6;">
+                [正在开发深圳高中生社区中，敬请期待]
+            </div>
+        </div>
+
+        <!-- 7. 联系方式 -->
+        <div class="section">
+            <h2 class="section-title">📬 联系方式</h2>
+            <div class="contact-section">
+                <p>📬 <strong>咨询方式：</strong>前往 <a href="contact.html">联系页面</a> 找到我</p>
+                <p>⏰ <strong>接单时间：</strong>周末集中处理，寒暑假全天候在线</p>
+                <p>📍 <strong>服务范围：</strong>深圳地区高中生组织（含深汕特别合作区）</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 MuSHAN &middot; 简单生活，认真写作</p>
+        </div>
+    </footer>
+</body>
+
+</html>
