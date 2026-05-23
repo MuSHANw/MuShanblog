@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World! | MuSHAN</title>
+    <link rel="icon" href="../images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../css/shared.css">
+    <style>
+        main.container {
+            max-width: 800px;
+        }
+
+        .article-header {
+            margin: 3rem 0 1.5rem;
+        }
+
+        .article-header h1 {
+            font-size: 2.2rem;
+            border-left: 5px solid #e67e22;
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-meta {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .article-body {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid #efefef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+
+        .article-body h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: #1a1a1a;
+        }
+
+        .article-body h3 {
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.8rem;
+            color: #1a1a1a;
+        }
+
+        .article-body p {
+            margin-bottom: 1rem;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 0.8rem 0 1rem 1.5rem;
+        }
+
+        .article-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .article-body strong {
+            color: #1a1a1a;
+        }
+
+        .article-body a {
+            color: #e67e22;
+            text-decoration: none;
+        }
+
+        .article-body a:hover {
+            text-decoration: underline;
+        }
+
+        .article-body code {
+            background: #f5f5f5;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #c0392b;
+        }
+
+        .article-body hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 2rem 0;
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid #e67e22;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .article-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #efefef;
+        }
+
+        .article-nav a {
+            color: #e67e22;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-nav a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .article-body {
+                padding: 1.5rem;
+            }
+
+            .article-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="blog-title">
+                <a href="../index.html">
+                    <img src="../images/Avatar.png" alt="MuSHAN头像">
+                    MuSHAN
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html">首页</a>
+                <a href="../projects.html">项目</a>
+                <a href="../tech-service.html">技术服务</a>
+                <a href="../about.html">关于</a>
+                <a href="../contact.html">联系</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="article-header">
+            <h1>Hello World!</h1>
+            <div class="article-meta">
+                <span>📅 2026-05-23</span>
+                <span style="margin-left:1rem;">🏷️ 博客 / 开篇</span>
+            </div>
+        </div>
+
+        <div class="article-body">
+            <h2>我是谁？</h2>
+            <p>我叫 <strong>MuSHAN</strong>，目前是深圳一名高一学生，也是一名全栈技术爱好者。</p>
+            <p>从今年4月开始，我利用周末时间，从零开始独立开发了一个完整的网站——<strong>深圳高中生社区</strong>。这是一个专为深圳地区高中生打造的学习交流平台，包含了用户系统、帖子互动、圈子社交、线上自习室等十多个功能模块。</p>
+            <p>有人问我：为什么要做这件事？</p>
+            <p>原因如下：我发现身边的同学有很多话想说——想找学习搭子、想分享考试经验、想吐槽学校食堂——但缺少一个真正属于我们深圳高中生自己的交流空间。QQ群太吵，朋友圈太杂，贴吧太乱。所以我就想：为什么不自己做一个呢？</p>
+            <p>于是便孕育出了这个社区。</p>
+
+            <h2>我做了什么？</h2>
+            <p>经过两个月的时间，目前项目主体功能已经完善。</p>
+            <p><strong>技术栈</strong>：Node.js + Express + PostgreSQL 做后端，原生 HTML/CSS/JS 写前端，用 Git 做版本管理，托管在 GitHub Pages。</p>
+            <p><strong>已实现的功能</strong>：</p>
+            <ul>
+                <li>完整的用户系统（注册/登录/个人资料/头像上传）</li>
+                <li>帖子发布、编辑、删除，支持分类和标签</li>
+                <li>点赞、收藏、回复、搜索</li>
+                <li>举报与反馈系统</li>
+                <li>实时通知系统（点赞/回复/关注等事件触发小红点）</li>
+                <li>管理员仪表盘（数据统计 + 折线图 + 内容审核）</li>
+                <li>关注系统与动态流</li>
+                <li>圈子系统（5人联合创建机制）</li>
+                <li>线上自习室（按行政区划分 + 番茄钟计时 + 实时同步）</li>
+                <li>完整的移动端适配</li>
+            </ul>
+            <p>项目已经在 GitHub 开源，仓库地址：<a href="https://github.com/MuSHANw/szhss-community" target="_blank">MuSHANw/szhss-community</a></p>
+
+            <h2>我还做了什么？</h2>
+            <p>在开发社区的过程中，我发现很多社团和班级也想有自己的官网，但外面的建站公司报价太高，动辄几百上千。</p>
+            <p>于是，我发起了一个小项目——<strong>橡树建站（深圳高中生技术支援计划）</strong>。</p>
+            <p>这是为深圳各高中的社团、学生会、班级提供极低价的网站制作服务：</p>
+            <ul>
+                <li><strong>体验版 10元</strong>：单页面宣传站，1-2天交付</li>
+                <li><strong>标准版 首次25元</strong>：多页面完整站点，含表单和教程</li>
+            </ul>
+            <p>如果你或者你们社团需要，可以通过微信/邮箱等方式联系我。</p>
+
+            <h2>这个博客会写什么？</h2>
+            <p>这里会记录我的技术学习过程、项目开发故事、以及一些对同龄人可能有用的经验分享。</p>
+            <p>比如：</p>
+            <ul>
+                <li>一个高中生如何从零开始学全栈开发</li>
+                <li>开发中踩过的坑和解决思路</li>
+                <li>如何用最低成本（甚至零成本）部署自己的网站</li>
+                <li>学生开发者如何平衡学业和项目</li>
+            </ul>
+            <p>如果你也是正在学技术的同学，欢迎一起交流～</p>
+
+            <h2>最后</h2>
+            <p>感谢你的来访。希望我的项目和文章能给你带来一点点启发。</p>
+            <blockquote>我相信，这个世界，终究不会是强者恒强，后来者总有机会！——雷军</blockquote>
+
+            <hr>
+
+            <p style="color:#6c757d;"><em>2026年5月23日，于深圳</em></p>
+        </div>
+
+        <div class="article-nav">
+            <span></span>
+            <a href="../index.html">← 返回首页</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 MuSHAN &middot; 星星之火，可以燎原</p>
+        </div>
+    </footer>
+</body>
+
+</html>

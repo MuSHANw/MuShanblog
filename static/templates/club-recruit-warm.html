@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{CLUB_NAME}} - 招新宣传</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ===== CSS 变量（可快速换肤） ===== */
+    :root {
+      --primary: #FF6B35;
+      --primary-light: #FFF0EB;
+      --bg: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --title-color: #1F2937;
+      --text-color: #4B5563;
+      --muted-color: #6B7280;
+      --footer-bg: #1F2937;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.14);
+      --radius: 12px;
+      --transition: 0.3s ease;
+    }
+
+    /* ===== 全局重置 ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background: var(--bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      padding-top: 64px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: var(--radius);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--title-color);
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      margin: 12px auto 0;
+    }
+
+    /* ===== 导航栏 ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: #fff;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: box-shadow var(--transition);
+    }
+    .navbar.scrolled {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo i {
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--title-color);
+    }
+    .nav-links a {
+      transition: color var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* 汉堡菜单按钮 */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--title-color);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* ===== Hero 区 ===== */
+    .hero {
+      min-height: calc(100vh - 64px);
+      background: linear-gradient(135deg, var(--primary) 0%, #FF9A6C 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .hero-content {
+      max-width: 700px;
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 36px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 44px;
+      border-radius: 50px;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+    .btn-primary:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    /* ===== 关于我们 ===== */
+    .about-grid {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+    }
+    .about-text {
+      flex: 1;
+    }
+    .about-text p {
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+    .about-image {
+      flex: 1;
+    }
+    .about-image img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== 活动风采 ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-body h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--title-color);
+      margin-bottom: 8px;
+    }
+    .card-body p {
+      font-size: 0.95rem;
+      color: var(--muted-color);
+    }
+
+    /* ===== 为什么加入我们 ===== */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .reason-card {
+      background: var(--card-bg);
+      text-align: center;
+      padding: 36px 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .reason-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+    .reason-card i {
+      font-size: 2.4rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .reason-card h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--title-color);
+      margin-bottom: 8px;
+    }
+    .reason-card p {
+      font-size: 0.9rem;
+      color: var(--muted-color);
+    }
+
+    /* ===== FAQ ===== */
+    .faq-list {
+      max-width: 750px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .faq-item {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 18px 24px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--title-color);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background var(--transition);
+    }
+    .faq-question:hover {
+      background: var(--primary-light);
+    }
+    .faq-question i {
+      transition: transform var(--transition);
+      color: var(--primary);
+    }
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 18px;
+    }
+    .faq-answer p {
+      font-size: 0.95rem;
+      color: var(--muted-color);
+      line-height: 1.8;
+    }
+
+    /* ===== 联系我们 ===== */
+    .contact-grid {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 240px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .contact-item i {
+      font-size: 1.5rem;
+      color: var(--primary);
+      width: 40px;
+      text-align: center;
+    }
+    .contact-item .label {
+      font-size: 0.85rem;
+      color: var(--muted-color);
+    }
+    .contact-item .value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--title-color);
+    }
+    .contact-qr img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== 页脚 ===== */
+    .footer {
+      background: var(--footer-bg);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 28px 0;
+      font-size: 0.9rem;
+    }
+    .footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer a {
+      color: var(--primary);
+    }
+
+    /* ===== 响应式：移动端 768px ===== */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 56px;
+      }
+      .navbar {
+        height: 56px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+      .nav-links {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+      }
+      .nav-links.open {
+        max-height: 360px;
+      }
+      .nav-links li {
+        border-top: 1px solid #f0f0f0;
+      }
+      .nav-links a {
+        display: block;
+        padding: 14px 24px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .about-grid {
+        flex-direction: column;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reasons-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-grid {
+        flex-direction: column;
+        text-align: center;
+      }
+      .contact-item {
+        justify-content: center;
+      }
+
+      .footer .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== 导航栏 ==================== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#hero" class="nav-logo">
+        <i class="{{CLUB_LOGO_ICON}}"></i>
+        <span>{{CLUB_NAME}}</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">关于我们</a></li>
+        <li><a href="#activities">活动风采</a></li>
+        <li><a href="#reasons">加入理由</a></li>
+        <li><a href="#faq">常见问题</a></li>
+        <li><a href="#contact">联系我们</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ==================== Hero 区 ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>{{CLUB_NAME}}</h1>
+      <p>{{CLUB_SLOGAN}}</p>
+      <a href="#contact" class="btn-primary">加入我们</a>
+    </div>
+  </section>
+
+  <!-- ==================== 关于我们 ==================== -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">关于我们</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>{{CLUB_INTRO_1}}</p>
+          <p>{{CLUB_INTRO_2}}</p>
+        </div>
+        <div class="about-image">
+          <img src="https://picsum.photos/seed/club-about/600/400" alt="{{CLUB_NAME}} 活动照">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 活动风采 ==================== -->
+  <section id="activities" style="background: var(--primary-light);">
+    <div class="container">
+      <h2 class="section-title">活动风采</h2>
+      <div class="cards-grid">
+        <!-- 活动 1 -->
+        <div class="card">
+          <img src="{{ACTIVITY_1_IMG}}" alt="{{ACTIVITY_1_TITLE}}">
+          <div class="card-body">
+            <h3>{{ACTIVITY_1_TITLE}}</h3>
+            <p>{{ACTIVITY_1_DESC}}</p>
+          </div>
+        </div>
+        <!-- 活动 2 -->
+        <div class="card">
+          <img src="{{ACTIVITY_2_IMG}}" alt="{{ACTIVITY_2_TITLE}}">
+          <div class="card-body">
+            <h3>{{ACTIVITY_2_TITLE}}</h3>
+            <p>{{ACTIVITY_2_DESC}}</p>
+          </div>
+        </div>
+        <!-- 活动 3 -->
+        <div class="card">
+          <img src="{{ACTIVITY_3_IMG}}" alt="{{ACTIVITY_3_TITLE}}">
+          <div class="card-body">
+            <h3>{{ACTIVITY_3_TITLE}}</h3>
+            <p>{{ACTIVITY_3_DESC}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 为什么加入我们 ==================== -->
+  <section id="reasons">
+    <div class="container">
+      <h2 class="section-title">为什么加入我们</h2>
+      <div class="reasons-grid">
+        <!-- 理由 1 -->
+        <div class="reason-card">
+          <i class="{{REASON_1_ICON}}"></i>
+          <h4>{{REASON_1_TITLE}}</h4>
+          <p>{{REASON_1_DESC}}</p>
+        </div>
+        <!-- 理由 2 -->
+        <div class="reason-card">
+          <i class="{{REASON_2_ICON}}"></i>
+          <h4>{{REASON_2_TITLE}}</h4>
+          <p>{{REASON_2_DESC}}</p>
+        </div>
+        <!-- 理由 3 -->
+        <div class="reason-card">
+          <i class="{{REASON_3_ICON}}"></i>
+          <h4>{{REASON_3_TITLE}}</h4>
+          <p>{{REASON_3_DESC}}</p>
+        </div>
+        <!-- 理由 4 -->
+        <div class="reason-card">
+          <i class="{{REASON_4_ICON}}"></i>
+          <h4>{{REASON_4_TITLE}}</h4>
+          <p>{{REASON_4_DESC}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 常见问题 ==================== -->
+  <section id="faq" style="background: var(--primary-light);">
+    <div class="container">
+      <h2 class="section-title">常见问题</h2>
+      <div class="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>{{FAQ_1_Q}}</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>{{FAQ_1_A}}</p>
+          </div>
+        </div>
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>{{FAQ_2_Q}}</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>{{FAQ_2_A}}</p>
+          </div>
+        </div>
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>{{FAQ_3_Q}}</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>{{FAQ_3_A}}</p>
+          </div>
+        </div>
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>{{FAQ_4_Q}}</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>{{FAQ_4_A}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 联系我们 ==================== -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">联系我们</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fab fa-qq"></i>
+            <div>
+              <div class="label">QQ 群号</div>
+              <div class="value">{{CONTACT_QQ}}</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-weixin"></i>
+            <div>
+              <div class="label">微信号</div>
+              <div class="value">{{CONTACT_WECHAT}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-qr">
+          <img src="https://picsum.photos/seed/contact-qr/300/300" alt="二维码">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 页脚 ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <span>&copy; 2025 {{CLUB_NAME}}</span>
+      <span>技术支持：<a href="#">橡树建站</a> | 深圳高中生社区</span>
+    </div>
+  </footer>
+
+  <!-- ==================== JavaScript ==================== -->
+  <script>
+    // ---- 导航栏滚动阴影 ----
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ---- 汉堡菜单 ----
+    const toggleBtn = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggleBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      const icon = toggleBtn.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    });
+
+    // 点击导航链接后自动关闭菜单（移动端）
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        const icon = toggleBtn.querySelector('i');
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      });
+    });
+
+    // ---- FAQ 手风琴 ----
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isActive = item.classList.contains('active');
+        // 关闭所有 FAQ
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+        // 如果之前没打开，则打开当前项
+        if (!isActive) item.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

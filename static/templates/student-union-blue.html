@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ORG_FULL_NAME}} - 官方主页</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ===== CSS 变量 ===== */
+    :root {
+      --primary: #1E40AF;
+      --primary-light: #EFF6FF;
+      --primary-dark: #1E3A8A;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --title-color: #1E293B;
+      --text-color: #475569;
+      --muted-color: #94A3B8;
+      --footer-bg: #0F172A;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.12);
+      --radius: 10px;
+      --transition: 0.3s ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background: var(--bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      padding-top: 64px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: var(--radius);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    /* ===== 带左侧竖线的标题 ===== */
+    .section-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--title-color);
+      margin-bottom: 40px;
+      padding-left: 18px;
+      border-left: 4px solid var(--primary);
+      line-height: 1.4;
+    }
+
+    /* ===== 导航栏 ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: #fff;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: box-shadow var(--transition);
+    }
+    .navbar.scrolled {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo i {
+      font-size: 1.3rem;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--title-color);
+    }
+    .nav-links a {
+      transition: color var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--title-color);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* ===== Hero 区 ===== */
+    .hero {
+      min-height: calc(100vh - 64px);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, #3B82F6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .hero-content {
+      max-width: 720px;
+    }
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 16px;
+      letter-spacing: 4px;
+    }
+    .hero-content p {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 36px;
+      border-radius: 50px;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+    }
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 36px;
+      border-radius: 50px;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      transition: transform var(--transition), background var(--transition), border-color var(--transition);
+    }
+    .btn-outline:hover {
+      transform: scale(1.06);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #fff;
+    }
+
+    /* ===== 关于我们 ===== */
+    .about-grid {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+    }
+    .about-text {
+      flex: 1;
+    }
+    .about-text p {
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+    .about-image {
+      flex: 1;
+    }
+    .about-image img {
+      width: 100%;
+      height: auto;
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== 最新公告 ===== */
+    .announcement-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .announcement-item {
+      padding: 20px 0;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .announcement-item:last-child {
+      border-bottom: none;
+    }
+    .announcement-item h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--title-color);
+      margin-bottom: 4px;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .announcement-item h3:hover {
+      color: var(--primary);
+    }
+    .announcement-date {
+      font-size: 0.85rem;
+      color: var(--muted-color);
+      margin-bottom: 6px;
+    }
+    .announcement-summary {
+      font-size: 0.95rem;
+      color: var(--text-color);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ===== 组织架构 ===== */
+    .org-leadership {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .org-leadership h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--muted-color);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .org-leadership .leaders {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .org-leadership .leaders span {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--title-color);
+    }
+    .org-leadership .leaders .title-tag {
+      font-size: 0.8rem;
+      color: var(--muted-color);
+      font-weight: 400;
+      margin-right: 6px;
+    }
+
+    .org-departments {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .dept-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--primary);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .dept-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .dept-card h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--title-color);
+      margin-bottom: 8px;
+    }
+    .dept-card .dept-leaders {
+      font-size: 0.9rem;
+      color: var(--muted-color);
+      margin-bottom: 8px;
+    }
+    .dept-card .dept-desc {
+      font-size: 0.92rem;
+      color: var(--text-color);
+    }
+
+    /* ===== 文档下载 ===== */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .doc-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      border: 2px solid transparent;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .doc-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-hover);
+    }
+    .doc-card i.doc-icon {
+      font-size: 2.4rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .doc-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--title-color);
+      margin-bottom: 6px;
+    }
+    .doc-card p {
+      font-size: 0.9rem;
+      color: var(--muted-color);
+      margin-bottom: 16px;
+    }
+    .doc-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    /* ===== 联系我们 ===== */
+    #contact {
+      background: var(--primary-light);
+    }
+    .contact-list {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .contact-item i {
+      font-size: 1.5rem;
+      color: var(--primary);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+    }
+    .contact-item .label {
+      font-size: 0.85rem;
+      color: var(--muted-color);
+    }
+    .contact-item .value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--title-color);
+    }
+
+    /* ===== 页脚 ===== */
+    .footer {
+      background: var(--footer-bg);
+      color: rgba(255, 255, 255, 0.75);
+      padding: 32px 0;
+      font-size: 0.88rem;
+    }
+    .footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer a {
+      color: #60A5FA;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 56px;
+      }
+      .navbar {
+        height: 56px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+      .nav-links {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+      }
+      .nav-links.open {
+        max-height: 360px;
+      }
+      .nav-links li {
+        border-top: 1px solid #f0f0f0;
+      }
+      .nav-links a {
+        display: block;
+        padding: 14px 24px;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .about-grid {
+        flex-direction: column;
+      }
+
+      .org-leadership .leaders {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .org-departments,
+      .docs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== 导航栏 ==================== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#hero" class="nav-logo">
+        <i class="fas fa-landmark"></i>
+        <span>{{ORG_SHORT_NAME}}</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">关于我们</a></li>
+        <li><a href="#announcements">最新公告</a></li>
+        <li><a href="#organization">组织架构</a></li>
+        <li><a href="#docs">文档下载</a></li>
+        <li><a href="#contact">联系我们</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ==================== Hero 区 ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>{{ORG_FULL_NAME}}</h1>
+      <p>{{ORG_MISSION}}</p>
+      <div class="hero-buttons">
+        <a href="#announcements" class="btn-primary">查看公告</a>
+        <a href="#contact" class="btn-outline">联系我们</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 关于我们 ==================== -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">关于我们</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>{{ORG_INTRO_1}}</p>
+          <p>{{ORG_INTRO_2}}</p>
+        </div>
+        <div class="about-image">
+          <img src="https://picsum.photos/seed/union-about/600/400" alt="{{ORG_FULL_NAME}} 合影">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 最新公告 ==================== -->
+  <section id="announcements" style="background: var(--primary-light);">
+    <div class="container">
+      <h2 class="section-title">最新公告</h2>
+      <div class="announcement-list">
+        <div class="announcement-item">
+          <h3>{{ANNOUNCEMENT_1_TITLE}}</h3>
+          <div class="announcement-date">{{ANNOUNCEMENT_1_DATE}}</div>
+          <div class="announcement-summary">{{ANNOUNCEMENT_1_SUMMARY}}</div>
+        </div>
+        <div class="announcement-item">
+          <h3>{{ANNOUNCEMENT_2_TITLE}}</h3>
+          <div class="announcement-date">{{ANNOUNCEMENT_2_DATE}}</div>
+          <div class="announcement-summary">{{ANNOUNCEMENT_2_SUMMARY}}</div>
+        </div>
+        <div class="announcement-item">
+          <h3>{{ANNOUNCEMENT_3_TITLE}}</h3>
+          <div class="announcement-date">{{ANNOUNCEMENT_3_DATE}}</div>
+          <div class="announcement-summary">{{ANNOUNCEMENT_3_SUMMARY}}</div>
+        </div>
+        <div class="announcement-item">
+          <h3>{{ANNOUNCEMENT_4_TITLE}}</h3>
+          <div class="announcement-date">{{ANNOUNCEMENT_4_DATE}}</div>
+          <div class="announcement-summary">{{ANNOUNCEMENT_4_SUMMARY}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 组织架构 ==================== -->
+  <section id="organization">
+    <div class="container">
+      <h2 class="section-title">组织架构</h2>
+
+      <!-- 主席团 -->
+      <div class="org-leadership">
+        <h3>主席团</h3>
+        <div class="leaders">
+          <span><span class="title-tag">主席</span>{{PRESIDENT_NAME}}</span>
+          <span><span class="title-tag">副主席</span>{{VICE_PRESIDENT_NAME}}</span>
+        </div>
+      </div>
+
+      <!-- 各部门 -->
+      <div class="org-departments">
+        <div class="dept-card">
+          <h4>{{DEPT_1_NAME}}</h4>
+          <div class="dept-leaders">部长：{{DEPT_1_HEAD}} ｜ 副部长：{{DEPT_1_VICE_HEAD}}</div>
+          <div class="dept-desc">{{DEPT_1_DESC}}</div>
+        </div>
+        <div class="dept-card">
+          <h4>{{DEPT_2_NAME}}</h4>
+          <div class="dept-leaders">部长：{{DEPT_2_HEAD}} ｜ 副部长：{{DEPT_2_VICE_HEAD}}</div>
+          <div class="dept-desc">{{DEPT_2_DESC}}</div>
+        </div>
+        <div class="dept-card">
+          <h4>{{DEPT_3_NAME}}</h4>
+          <div class="dept-leaders">部长：{{DEPT_3_HEAD}} ｜ 副部长：{{DEPT_3_VICE_HEAD}}</div>
+          <div class="dept-desc">{{DEPT_3_DESC}}</div>
+        </div>
+        <div class="dept-card">
+          <h4>{{DEPT_4_NAME}}</h4>
+          <div class="dept-leaders">部长：{{DEPT_4_HEAD}} ｜ 副部长：{{DEPT_4_VICE_HEAD}}</div>
+          <div class="dept-desc">{{DEPT_4_DESC}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 文档下载 ==================== -->
+  <section id="docs" style="background: var(--primary-light);">
+    <div class="container">
+      <h2 class="section-title">文档下载</h2>
+      <div class="docs-grid">
+        <div class="doc-card">
+          <i class="fas fa-file-alt doc-icon"></i>
+          <h4>{{DOC_1_TITLE}}</h4>
+          <p>{{DOC_1_DESC}}</p>
+          <span class="doc-badge"><i class="fas fa-file-pdf"></i> PDF · 2.3 MB</span>
+        </div>
+        <div class="doc-card">
+          <i class="fas fa-file-word doc-icon"></i>
+          <h4>{{DOC_2_TITLE}}</h4>
+          <p>{{DOC_2_DESC}}</p>
+          <span class="doc-badge"><i class="fas fa-file-word"></i> DOCX · 1.1 MB</span>
+        </div>
+        <div class="doc-card">
+          <i class="fas fa-file-excel doc-icon"></i>
+          <h4>{{DOC_3_TITLE}}</h4>
+          <p>{{DOC_3_DESC}}</p>
+          <span class="doc-badge"><i class="fas fa-file-excel"></i> XLSX · 856 KB</span>
+        </div>
+        <div class="doc-card">
+          <i class="fas fa-file-powerpoint doc-icon"></i>
+          <h4>{{DOC_4_TITLE}}</h4>
+          <p>{{DOC_4_DESC}}</p>
+          <span class="doc-badge"><i class="fas fa-file-powerpoint"></i> PPTX · 4.7 MB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 联系我们 ==================== -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">联系我们</h2>
+      <div class="contact-list">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <div class="label">电子邮箱</div>
+            <div class="value">{{CONTACT_EMAIL}}</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <div class="label">办公地点</div>
+            <div class="value">{{CONTACT_LOCATION}}</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <div>
+            <div class="label">值班时间</div>
+            <div class="value">{{CONTACT_HOURS}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 页脚 ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <span>&copy; 2025 {{ORG_FULL_NAME}}</span>
+      <span>{{ORG_SHORT_NAME}} — {{ORG_MISSION}}</span>
+      <span>技术支持：<a href="#">橡树建站</a> | 深圳高中生社区</span>
+    </div>
+  </footer>
+
+  <!-- ==================== JavaScript ==================== -->
+  <script>
+    // ---- 导航栏滚动阴影 ----
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ---- 汉堡菜单 ----
+    const toggleBtn = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggleBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      const icon = toggleBtn.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    });
+
+    // 点击导航链接后自动关闭菜单
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        const icon = toggleBtn.querySelector('i');
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      });
+    });
+  </script>
+
+</body>
+</html>
