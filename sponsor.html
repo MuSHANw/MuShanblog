@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赞助 | MuSHAN</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/shared.css">
+    <style>
+        main.container {
+            max-width: 1000px;
+        }
+
+        /* ===== Hero 区 ===== */
+        .sponsor-hero {
+            text-align: center;
+            padding: 4rem 1.5rem 3.5rem;
+            margin: 2rem 0 3rem;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%);
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(255, 154, 158, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sponsor-hero .heart-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .sponsor-hero h1 {
+            font-size: 2.4rem;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            margin-bottom: 0.8rem;
+        }
+
+        .sponsor-hero .subtitle {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+        }
+
+        /* ===== 通用区块 ===== */
+        .section-title {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #e67e22;
+            padding-left: 1rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        /* ===== 赞助方式卡片 ===== */
+        .pay-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .pay-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid #efefef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .pay-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .pay-card .pay-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .pay-card .pay-tagline {
+            font-size: 0.95rem;
+            color: #6c757d;
+            margin-bottom: 1.2rem;
+        }
+
+        /* 微信：绿色主题 */
+        .pay-card.wechat {
+            border-top: 4px solid #07c160;
+        }
+
+        .pay-card.wechat .pay-name {
+            color: #07c160;
+        }
+
+        /* 支付宝：蓝色主题 */
+        .pay-card.alipay {
+            border-top: 4px solid #1677ff;
+        }
+
+        .pay-card.alipay .pay-name {
+            color: #1677ff;
+        }
+
+        /* 收款码框 */
+        .qr-box {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 1rem;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .qr-placeholder {
+            display: none;
+            width: 100%;
+            height: 100%;
+            border: 2px dashed #ccc;
+            border-radius: 16px;
+            color: #999;
+            font-size: 0.9rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            background: #fafafa;
+        }
+
+        .qr-placeholder span {
+            font-size: 1.8rem;
+        }
+
+        .qr-tip {
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+
+        /* ===== 赞助说明 ===== */
+        .sponsor-notes {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid #efefef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .sponsor-notes .notes-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .sponsor-notes ul {
+            list-style: none;
+        }
+
+        .sponsor-notes li {
+            padding: 0.5rem 0;
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.6;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+
+        .sponsor-notes li:last-child {
+            border-bottom: none;
+        }
+
+        .sponsor-notes li strong {
+            color: #e67e22;
+        }
+
+        .sponsor-notes li a {
+            color: #e67e22;
+            text-decoration: none;
+        }
+
+        .sponsor-notes li a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .pay-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sponsor-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .qr-box {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="blog-title">
+                <a href="index.html">
+                    <img src="images/Avatar.png" alt="MuSHAN头像">
+                    MuSHAN
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="projects.html">项目</a>
+                <a href="tech-service.html">技术服务</a>
+                <a href="about.html">关于</a>
+                <a href="contact.html">联系</a>
+                <a href="sponsor.html" class="nav-sponsor-btn active">❤️ 赞助</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero 区 -->
+        <div class="sponsor-hero">
+            <div class="heart-icon">💖</div>
+            <h1>支持 MuSHAN</h1>
+            <p class="subtitle">让社区变得更好</p>
+        </div>
+
+        <!-- 引言 -->
+        <div class="section" style="text-align:center; max-width:720px; margin-left:auto; margin-right:auto;">
+            <p style="font-size:1.1rem; color:#4a5568; line-height:1.9;">
+                我正在开发并维护"深圳高中生社区"等一系列开源项目。<br>
+                你的每一份赞助，都将直接支持<strong style="color:#e67e22;">服务器续费、功能开发和社区运营</strong>。<br>
+                感谢你的支持！
+            </p>
+        </div>
+
+        <!-- 赞助方式 -->
+        <div class="section">
+            <h2 class="section-title">💳 赞助方式</h2>
+            <div class="pay-grid">
+                <!-- 微信支付 -->
+                <div class="pay-card wechat">
+                    <div class="pay-name">💬 微信支付</div>
+                    <p class="pay-tagline">微信扫码赞助</p>
+                    <div class="qr-box">
+                        <img src="images/wechat-qr.jpg" alt="微信收款码"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="qr-placeholder">
+                            <span>🖼️</span>
+                            请上传收款码图片
+                        </div>
+                    </div>
+                    <p class="qr-tip">打开微信「扫一扫」，感谢支持～</p>
+                </div>
+
+                <!-- 支付宝 -->
+                <div class="pay-card alipay">
+                    <div class="pay-name">💰 支付宝</div>
+                    <p class="pay-tagline">支付宝扫码赞助</p>
+                    <div class="qr-box">
+                        <img src="images/alipay-qr.jpg" alt="支付宝收款码"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="qr-placeholder">
+                            <span>🖼️</span>
+                            请上传收款码图片
+                        </div>
+                    </div>
+                    <p class="qr-tip">打开支付宝「扫一扫」，感谢支持～</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 赞助说明 -->
+        <div class="section">
+            <h2 class="section-title">📌 赞助说明</h2>
+            <div class="sponsor-notes">
+                <div class="notes-title">关于赞助，你需要知道的：</div>
+                <ul>
+                    <li>所有赞助款项将用于 <strong>服务器续费、域名续费和 API 费用</strong></li>
+                    <li>赞助为<strong>自愿性质</strong>，不影响社区的任何免费功能</li>
+                    <li>如需大额赞助或合作，请联系邮箱：<a href="mailto:MuSHANwyc@outlook.com">MuSHANwyc@outlook.com</a></li>
+                    <li>赞助后可获得<strong>"社区赞助者"专属称号</strong>（即将上线）</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 MuSHAN · <a href="szhss-community.html" style="color:inherit;">技术支持：深圳高中生社区</a></p>
+        </div>
+    </footer>
+</body>
+
+</html>

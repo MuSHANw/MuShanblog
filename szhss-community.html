@@ -84,6 +84,22 @@
             background: #1565C0;
         }
 
+        .nav-sponsor {
+            background: linear-gradient(135deg, #ff5e7a, #ff8a5c);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600 !important;
+            box-shadow: 0 2px 8px rgba(255, 94, 122, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-sponsor:hover {
+            color: white !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(255, 94, 122, 0.45);
+        }
+
         .menu-toggle {
             display: none;
             background: none;
@@ -157,6 +173,18 @@
             opacity: 0.9;
             margin-bottom: 40px;
             line-height: 1.6;
+        }
+
+        .live-badge {
+            display: inline-block;
+            background: rgba(0, 200, 83, 0.15);
+            color: #00c853;
+            border: 1px solid rgba(0, 200, 83, 0.4);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
         }
 
         .hero-btns {
@@ -405,7 +433,8 @@
             <a href="#intro">项目简介</a>
             <a href="#stats">数据</a>
             <a href="#download">下载</a>
-            <a href="#" class="nav-cta">进入社区</a>
+            <a href="https://szhss-community.top/" class="nav-cta">进入社区</a>
+            <a href="sponsor.html" class="nav-sponsor">❤️ 赞助</a>
         </div>
     </nav>
 
@@ -414,10 +443,11 @@
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>深圳高中生社区（开发中，敬请期待）</h1>
+            <a href="https://szhss-community.top/" class="live-badge">🟢 已上线 · 点击进入</a>
+            <h1>深圳高中生社区</h1>
             <p>专为深圳地区高中生打造的学习交流平台<br>学习互助 · 生活分享 · 圈子社交 · 一起自习</p>
             <div class="hero-btns">
-                <a href="#" class="btn-primary">🚀 进入社区</a>
+                <a href="https://szhss-community.top/" class="btn-primary">🚀 进入社区</a>
                 <a href="#intro" class="btn-outline">了解更多 ↓</a>
             </div>
         </div>
@@ -540,14 +570,14 @@
 
     <!-- 页脚 -->
     <footer class="footer">
-        <p>© 2026 深圳高中生社区 | <a href="rules.html">社区公约</a> | 粤ICP备xxxxxxxx号</p>
+        <p>© 2026 <a href="https://szhss-community.top/" target="_blank">深圳高中生社区</a> | <a href="rules.html">社区公约</a> | 粤ICP备xxxxxxxx号</p>
         <p>由 <strong>MuSHAN</strong> & <strong>MING</strong> 开发 | <a
-                href="https://github.com/MuSHANw/szhss-community"><i class="fab fa-github"></i> GitHub</a></p>
+                href="https://github.com/MuSHANw/szhss-community" target="_blank"><i class="fab fa-github"></i> GitHub</a></p>
         <p>联系邮箱：MuSHANwyc@outlook.com / yingming988@qq.com</p>
     </footer>
 
     <script>
-        window.API_BASE = window.API_BASE || '/api';
+        window.API_BASE = window.API_BASE || 'https://szhss-community.top';
 
         // 导航栏滚动效果
         window.addEventListener('scroll', () => {
@@ -562,9 +592,8 @@
         // 加载实时数据
         async function loadStats() {
             try {
-                const res = await fetch(`${window.API_BASE}/public/stats`);
+                const res = await fetch(`${window.API_BASE}/api/public/stats`);
                 if (!res.ok) {
-                    // 没有管理员权限时，使用模拟数据
                     setFallbackStats();
                     return;
                 }
@@ -573,8 +602,9 @@
                 animateNumber('statPosts', stats.totalPosts || 0);
                 animateNumber('statReplies', stats.totalReplies || 0);
                 animateNumber('statLikes', stats.totalLikes || 0);
-                animateNumber('statCircles', stats.totalFavorites || 0);
+                animateNumber('statCircles', stats.totalCircles || 0);
             } catch (e) {
+                console.warn('加载统计数据失败:', e);
                 setFallbackStats();
             }
         }
@@ -582,7 +612,7 @@
         function setFallbackStats() {
             // 如果 API 不可用，显示占位符
             document.querySelectorAll('.stat-number').forEach(el => {
-                el.textContent = '---';
+                el.textContent = '--';
             });
         }
 
