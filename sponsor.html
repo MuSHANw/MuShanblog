@@ -400,16 +400,42 @@
                     if (!userId) continue;
                     try {
                         const res = await fetch(`https://szhss-community.top/api/users/${userId}`);
+                        if (!res.ok) {
+                            // 用户不存在或接口异常，显示默认图标
+                            showDefaultIcon(item);
+                            continue;
+                        }
                         const data = await res.json();
-                        if (data.avatar_url) {
+                        let avatarUrl = data.avatar_url;
+                        if (avatarUrl) {
+                            // 处理相对路径，避免头像404
+                            if (avatarUrl.startsWith('/')) {
+                                avatarUrl = 'https://szhss-community.top' + avatarUrl;
+                            } else if (!/^https?:\/\//.test(avatarUrl)) {
+                                avatarUrl = 'https://szhss-community.top/' + avatarUrl;
+                            }
+                            // 设置头像；若加载失败，img 的 onerror 会自动切换为默认图标
                             const img = item.querySelector('img');
-                            if (img) img.src = data.avatar_url;
+                            if (img) img.src = avatarUrl;
+                        } else {
+                            // 用户未设置头像，显示默认图标
+                            showDefaultIcon(item);
                         }
                     } catch (e) {
-                        // 获取头像失败，保留默认图标
+                        // 请求失败，显示默认图标
+                        showDefaultIcon(item);
                     }
                 }
             }
+
+            // 头像不可用时，显示默认 Font Awesome 用户图标
+            function showDefaultIcon(item) {
+                const img = item.querySelector('img');
+                const icon = item.querySelector('i');
+                if (img) img.style.display = 'none';
+                if (icon) icon.style.display = 'block';
+            }
+
             loadSponsorAvatars();
         </script>
 
