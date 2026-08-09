@@ -47,10 +47,23 @@
         }
 
         @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            15% { transform: scale(1.15); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.15);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
         }
 
         /* ===== 通用区块 ===== */
@@ -333,7 +346,7 @@
                     <p class="pay-tagline">微信扫码赞助</p>
                     <div class="qr-box">
                         <img src="https://szhss-community.top/uploads/wechat-qr.jpg" alt="微信收款码"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="qr-placeholder">
                             <span>🖼️</span>
                             请上传收款码图片
@@ -348,7 +361,7 @@
                     <p class="pay-tagline">支付宝扫码赞助</p>
                     <div class="qr-box">
                         <img src="https://szhss-community.top/uploads/alipay-qr.jpg" alt="支付宝收款码"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="qr-placeholder">
                             <span>🖼️</span>
                             请上传收款码图片
@@ -369,7 +382,9 @@
 
         <script>
             var sponsorList = [
-                { nickname: "MING", userId: 7 }
+                { nickname: "MING", userId: 7 },
+                { nickname: "CC", userId: 6 },
+                { nickname: "小熊", userId: 16 }
             ];
 
             // 渲染赞助者名单
@@ -377,7 +392,7 @@
             if (sponsorList.length === 0) {
                 listHtml = '<p style="color:#9CA3AF;">暂无赞助记录，成为第一个赞助者吧~</p>';
             } else {
-                sponsorList.forEach(function(sponsor) {
+                sponsorList.forEach(function (sponsor) {
                     listHtml += `
                         <a href="https://szhss-community.top/user-profile.html?uid=${sponsor.userId}"
                            class="sponsor-item" data-user-id="${sponsor.userId}" target="_blank">
