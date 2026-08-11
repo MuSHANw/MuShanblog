@@ -451,7 +451,29 @@
                 if (icon) icon.style.display = 'block';
             }
 
+            // 加载赞助者最新昵称（赞助者在社区改昵称后自动同步）
+            async function loadSponsorNicknames() {
+                const items = document.querySelectorAll('.sponsor-item');
+                for (const item of items) {
+                    const userId = item.dataset.userId;
+                    if (!userId) continue;
+                    try {
+                        const res = await fetch(`https://szhss-community.top/api/users/${userId}`);
+                        if (res.ok) {
+                            const data = await res.json();
+                            if (data.nickname) {
+                                const nameEl = item.querySelector('.sponsor-name');
+                                if (nameEl) nameEl.textContent = data.nickname;
+                            }
+                        }
+                    } catch (e) {
+                        // 获取失败，保持原有昵称不变
+                    }
+                }
+            }
+
             loadSponsorAvatars();
+            loadSponsorNicknames();
         </script>
 
         <!-- 赞助说明 -->
